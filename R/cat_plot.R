@@ -71,7 +71,7 @@ catplot <- function(xs, ys,
 		points(x=xscale, y=yscale, col=linecolor, type="l")
 	}
 	rasterImage(imgMod, xscale-(size/2), yscale-(size/2), xscale+(size/2), yscale+(size/2), interpolate=TRUE)
-	list(xs=x, ys=y, args=args, canvas=canvas)
+	list(xs=xs, ys=ys, args=args, canvas=canvas)
 }
 
 
