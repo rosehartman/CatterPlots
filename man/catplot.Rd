@@ -30,9 +30,3 @@ a cat plot object... to plot more cats.
 \description{
 Make a cat plot
 }
-\examples{
-	x <- -10:10
-	y <- -x^2 + 10
-	purr <- catplot(xs=x, ys=y, cat=3, catcolor=c(0,1,1,1))
-	cats(purr, -x, -y, cat=4, catcolor=c(1,0,1,1))
-}

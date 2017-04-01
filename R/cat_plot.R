@@ -59,8 +59,8 @@ catplot <- function(xs, ys,
 
 	xat = seq(min(xscale), max(xscale), length.out=length(xscale))
 	yat = seq(min(yscale), max(yscale), length.out=length(yscale))
-	xaxtlab = round(seq(min(xs), max(xs),length.out=length(xat)),2)
-	yaxtlab = round(seq(min(ys), max(ys),length.out=length(xat)),2)
+	xaxtlab = round(seq(min(xs), max(xs),length.out=length(xat)),1)
+	yaxtlab = round(seq(min(ys), max(ys),length.out=length(xat)),1)
 	axis(side=1, at=xat, labels=xaxtlab)
 	axis(side=2, at=yat, labels=yaxtlab)
 

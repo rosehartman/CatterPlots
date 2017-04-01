@@ -2,9 +2,9 @@
 % Please edit documentation in R/cat_plot.R
 \name{cats}
 \alias{cats}
-\title{Plot more cats.}
+\title{Plot more cats!}
 \usage{
-cats(obj = NULL, xs, ys, size = 0.1, cat = 2, catcolor = c(0,0,0,1),
+cats(obj = NULL, xs, ys, size = 0.1, cat = 1, catcolor = c(0, 0, 0, 1),
   linecolor = 1, type = "justcats")
 }
 \arguments{
@@ -16,7 +16,7 @@ cats(obj = NULL, xs, ys, size = 0.1, cat = 2, catcolor = c(0,0,0,1),
 
 \item{size}{the size of the cat (0.1 is a good starting point)}
 
-\item{cat}{the cat model, 1 through 11}
+\item{cat}{the cat model, 1 through 12}
 
 \item{catcolor}{a modifier vector to the png matrix (try c(1,0,0,1))}
 
@@ -25,14 +25,8 @@ cats(obj = NULL, xs, ys, size = 0.1, cat = 2, catcolor = c(0,0,0,1),
 \item{type}{the type of plot ... justcats, or line}
 }
 \value{
-
+a cat plot object... to plot more cats.
 }
 \description{
 Plot more cats!
-}
-\examples{
-	x <- -10:10
-	y <- -x^2 + 10
-	purr <- catplot(xs=x, ys=y, cat=3, catcolor=c(0,1,1,1))
-	cats(purr, -x, -y, cat=2, catcolor=c(0,0,0,1))
 }

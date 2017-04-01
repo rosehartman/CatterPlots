@@ -28,6 +28,7 @@ createCatList <- function(dir) {
 	fs <- list.files(dir, pattern="png")
 	catlist <- vector("list", length(fs))
 	for (i in 1:length(fs)) {
+		print(fs[i])
 		catlist[[i]] <- png::readPNG(source=paste0(dir,fs[i]))
 	}
 	catlist
