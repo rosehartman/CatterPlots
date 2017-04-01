@@ -10,7 +10,7 @@ Rainbow plots.
 library(CatterPlots)
 x <- -10:10
 y <- -x^2 + 10
-rainbowCats(x, y, yspread=0.05, xspread=0.05, ptsize=2, catshiftx=0.5, canvas=c(-0.5,1.5,-1,1.5))
+rainbowCats(x, y, yspread=0.05, xspread=0.05, ptsize=2, catshiftx=0.5, catshifty=-0.2, canvas=c(-0.5,1.5,-1,1.5))
 ```
 
 <img src="https://github.com/Gibbsdavidl/CatterPlot/blob/master/examples/nyan_cat_plot.png" width="600">
