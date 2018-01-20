@@ -37,7 +37,7 @@
 #' @export
 multicat <- function(xs, ys,
 					size=0.1, cat=c(1,2),
-					catcolor = c(0,0,0,1),
+					catcolor = '#000000FF',
 					linecolor=1, type="justcats",
 					canvas=c(0,1.1,0,1.1), ...) {
 	require(png)
@@ -84,7 +84,7 @@ multicat <- function(xs, ys,
 
 multipoint <- function(xs, ys,
 					ptsize=0.1,
-					catcolor = c(0,0,0,1),
+					catcolor = '#000000FF',
 					linecolor=1,
 					canvas=c(0,1.1,0,1.1),
                      ...) {
@@ -94,13 +94,11 @@ multipoint <- function(xs, ys,
 	plot(x=xs, y=ys, col=0, xaxt="n", yaxt="n", ...)
 	par(usr=canvas)
 
-    pointColor <- rgb(catcolor[1], catcolor[2], catcolor[3], maxColorValue=255)
-
 	scaledData <- scaleData(xs,ys,args)
 	xscale <- scaledData$xscale
 	yscale <- scaledData$yscale
 
-    points(x=xscale, y=yscale, col=pointColor, xaxt="n", yaxt="n", pch=15, cex=ptsize, ...)
+    points(x=xscale, y=yscale, col=catcolor, xaxt="n", yaxt="n", pch=15, cex=ptsize, ...)
 
 	xat = seq(min(xscale), max(xscale), length.out=length(xscale))
 	yat = seq(min(yscale), max(yscale), length.out=length(yscale))
