@@ -67,11 +67,11 @@ multicat <- function(xs, ys,
 		points(x=xscale, y=yscale, col=linecolor, type="l")
 	}
 
-	cats <- rep(cat, length(xscale))
-	catcolors <- rep(catcolor, length(xscale))
+	cats <- rep_len(cat, length(xscale))
+	catcolors <- rep_len(catcolor, length(xscale))
 	for (i in 1:length(xscale)) {
 		thiscat <- cats[i]
-		thiscolor <- catcolors[[i]]
+		thiscolor <- catcolors[i]
 		img <- catdat[[thiscat]]
 		# modify the cat image
 		imgMod <- colorMod(img, thiscolor)
@@ -151,11 +151,11 @@ morecats <- function(obj=NULL, xs, ys, size=0.1, cat=c(4,5,6), catcolor = list(c
 	}
 
 
-	cats <- rep(cat, length(xscale))
-	catcolors <- rep(catcolor, length(xscale))
+	cats <- rep_len(cat, length(xscale))
+	catcolors <- rep_len(catcolor, length(xscale))
 	for (i in 1:length(xscale)) {
 		thiscat <- cats[i]
-		thiscolor <- catcolors[[i]]
+		thiscolor <- catcolors[i]
 		img <- catdat[[thiscat]]
 		# modify the cat image
 		imgMod <- colorMod(img, thiscolor)
