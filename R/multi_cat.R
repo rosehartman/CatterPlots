@@ -69,14 +69,12 @@ multicat <- function(xs, ys,
 
 	cats <- rep_len(cat, length(xscale))
 	catcolors <- rep_len(catcolor, length(xscale))
-	for (i in 1:length(xscale)) {
-		thiscat <- cats[i]
-		thiscolor <- catcolors[i]
-		img <- catdat[[thiscat]]
-		# modify the cat image
-		imgMod <- colorMod(img, thiscolor)
-		rasterImage(imgMod, xscale[i]-(size/2), yscale[i]-(size/2), xscale[i]+(size/2), yscale[i]+(size/2), interpolate=TRUE)
-	}
+
+	# color the images
+	imgs = mapply(colorMod, catdat[cats], catcolors, SIMPLIFY = F)
+
+	# draw them
+	invisible(mapply(rasterImage, imgs, xscale - size/2, yscale - size/2, xscale + size/2, yscale + size/2))
 
 	list(xs=xs, ys=ys, args=args, canvas=canvas)
 }
@@ -131,7 +129,7 @@ multipoint <- function(xs, ys,
 #' purr <- multicat(xs=x, ys=y, cat=c(1,2,3), catcolor=c(0,1,1,1))
 #' cats(purr, -x, -y, cat=4, catcolor=c(1,0,1,1))'
 #' @export
-morecats <- function(obj=NULL, xs, ys, size=0.1, cat=c(4,5,6), catcolor = list(c(0,0,1,1),c(0,1,0,1)),
+morecats <- function(obj=NULL, xs, ys, size=0.1, cat=c(4,5,6), catcolor = c('#0000FFFF', '#00FF00FF'),
 										linecolor=1, type="justcats", yshift=0, xshift=0) {
 	# needs a plot already up, and the catObj returned from it.
 	if(is.null(obj)) {
@@ -153,22 +151,20 @@ morecats <- function(obj=NULL, xs, ys, size=0.1, cat=c(4,5,6), catcolor = list(c
 
 	cats <- rep_len(cat, length(xscale))
 	catcolors <- rep_len(catcolor, length(xscale))
-	for (i in 1:length(xscale)) {
-		thiscat <- cats[i]
-		thiscolor <- catcolors[i]
-		img <- catdat[[thiscat]]
-		# modify the cat image
-		imgMod <- colorMod(img, thiscolor)
-		rasterImage(imgMod, xscale[i]-(size/2), yscale[i]-(size/2), xscale[i]+(size/2), yscale[i]+(size/2), interpolate=TRUE)
-        print(paste(xscale[i]-(size/2), "  ",
-                    yscale[i]-(size/2), "  ",
-                    xscale[i]+(size/2), "  ",
-                    yscale[i]+(size/2)))
-	}
+
+	# color the images
+	imgs = mapply(colorMod, catdat[cats], catcolors, SIMPLIFY = F)
+
+	# draw them
+	invisible(mapply(rasterImage, imgs, xscale - size/2, yscale - size/2, xscale + size/2, yscale + size/2))
+
+	cat(paste(apply(matrix(c(xscale - size/2, yscale - size/2, xscale + size/2, yscale + size/2), ncol=4),
+	                1, paste, collapse='  '),
+	          collapse='\n'))
 }
 
 
-morepoints <- function(obj=NULL, xs, ys, ptsize=0.1, catcolor = c(0,0,1,1), yshift=0, xshift=0) {
+morepoints <- function(obj=NULL, xs, ys, ptsize=0.1, catcolor = '#000000FF', yshift=0, xshift=0) {
 	# needs a plot already up, and the catObj returned from it.
 	if(is.null(obj)) {
 		print("Please feed the cats!  cat_food <- catplot(...);  cats(cat_food, ...)")
@@ -178,8 +174,5 @@ morepoints <- function(obj=NULL, xs, ys, ptsize=0.1, catcolor = c(0,0,1,1), yshi
 	xscale <- scaledData$xscale + xshift
 	yscale <- scaledData$yscale + yshift
 
-    pointColor <- rgb(catcolor[1], catcolor[2], catcolor[3], maxColorValue=1)
-    print(pointColor)
-
-	points(x=xscale, y=yscale, col=pointColor, xaxt="n", yaxt="n", pch=15, cex=ptsize)
+	points(x=xscale, y=yscale, col=catcolor, xaxt="n", yaxt="n", pch=15, cex=ptsize)
 }
