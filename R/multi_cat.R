@@ -67,16 +67,14 @@ multicat <- function(xs, ys,
 		points(x=xscale, y=yscale, col=linecolor, type="l")
 	}
 
-	cats <- rep(cat, length(xscale))
-	catcolors <- rep(catcolor, length(xscale))
-	for (i in 1:length(xscale)) {
-		thiscat <- cats[i]
-		thiscolor <- catcolors[[i]]
-		img <- catdat[[thiscat]]
-		# modify the cat image
-		imgMod <- colorMod(img, thiscolor)
-		rasterImage(imgMod, xscale[i]-(size/2), yscale[i]-(size/2), xscale[i]+(size/2), yscale[i]+(size/2), interpolate=TRUE)
-	}
+	cats <- rep_len(cat, length(xscale))
+	catcolors <- rep_len(catcolor, length(xscale))
+
+	# color the images
+	imgs = mapply(colorMod, catdat[cats], catcolors, SIMPLIFY = F)
+
+	# draw them
+	invisible(mapply(rasterImage, imgs, xscale - size/2, yscale - size/2, xscale + size/2, yscale + size/2))
 
 	list(xs=xs, ys=ys, args=args, canvas=canvas)
 }
@@ -151,20 +149,18 @@ morecats <- function(obj=NULL, xs, ys, size=0.1, cat=c(4,5,6), catcolor = c('#00
 	}
 
 
-	cats <- rep(cat, length(xscale))
-	catcolors <- rep(catcolor, length(xscale))
-	for (i in 1:length(xscale)) {
-		thiscat <- cats[i]
-		thiscolor <- catcolors[[i]]
-		img <- catdat[[thiscat]]
-		# modify the cat image
-		imgMod <- colorMod(img, thiscolor)
-		rasterImage(imgMod, xscale[i]-(size/2), yscale[i]-(size/2), xscale[i]+(size/2), yscale[i]+(size/2), interpolate=TRUE)
-        print(paste(xscale[i]-(size/2), "  ",
-                    yscale[i]-(size/2), "  ",
-                    xscale[i]+(size/2), "  ",
-                    yscale[i]+(size/2)))
-	}
+	cats <- rep_len(cat, length(xscale))
+	catcolors <- rep_len(catcolor, length(xscale))
+
+	# color the images
+	imgs = mapply(colorMod, catdat[cats], catcolors, SIMPLIFY = F)
+
+	# draw them
+	invisible(mapply(rasterImage, imgs, xscale - size/2, yscale - size/2, xscale + size/2, yscale + size/2))
+
+	cat(paste(apply(matrix(c(xscale - size/2, yscale - size/2, xscale + size/2, yscale + size/2), ncol=4),
+	                1, paste, collapse='  '),
+	          collapse='\n'))
 }
 
 
@@ -178,5 +174,5 @@ morepoints <- function(obj=NULL, xs, ys, ptsize=0.1, catcolor = '#000000FF', ysh
 	xscale <- scaledData$xscale + xshift
 	yscale <- scaledData$yscale + yshift
 
-	points(x=xscale, y=yscale, col=catColor, xaxt="n", yaxt="n", pch=15, cex=ptsize)
+	points(x=xscale, y=yscale, col=catcolor, xaxt="n", yaxt="n", pch=15, cex=ptsize)
 }
