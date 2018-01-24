@@ -40,17 +40,17 @@ In R:
 library(CatterPlots)
 x <- -10:10
 y <- -x^2 + 10
-purr <- catplot(xs=x, ys=y, cat=3, catcolor=c(0,1,1,1))
-cats(purr, -x, -y, cat=4, catcolor=c(1,0,1,1))
+purr <- catplot(xs=x, ys=y, cat=3, catcolor='#000000FF')
+cats(purr, -x, -y, cat=4, catcolor='#FF0000')
 
 # for more fun ...
-meow <- multicat(xs=x, ys=y, cat=c(1,2,3), catcolor=list(c(1,1,0,1),c(0,1,1,1)), canvas=c(-0.1,1.1, -0.1, 1.1))
-morecats(purr, x, 10*sin(x)+40, size=0.05, cat=c(4,5,6), catcolor=list(c(0,0,1,1),c(0,1,0,1)), type="line")
+meow <- multicat(xs=x, ys=y, cat=c(1,2,3), catcolor=list('#33FCFF','#FF0000'), canvas=c(-0.1,1.1, -0.1, 1.1))
+morecats(purr, x, 10*sin(x)+40, size=0.05, cat=c(4,5,6), catcolor=list('#0495EE','#EE7504'), type="line")
 
 # random cats
 meow <- multicat(xs=x, ys=rnorm(21),
                  cat=c(1,2,3,4,5,6,7,8,9,10),
-                 catcolor=list(c(0,0,0,1)),
+                 catcolor=list('#33FCFF'),
                  canvas=c(-0.1,1.1, -0.1, 1.1),
                  xlab="some cats", ylab="other cats", main="Random Cats")
 
