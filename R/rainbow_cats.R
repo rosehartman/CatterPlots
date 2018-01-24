@@ -51,16 +51,17 @@ rainbowCats <- function(xs, ys, ptsize=0.1, yspread=0.1, xspread=0.1,
     min_x <- min(xs)
     z <- predict(sm, x=seq(min_x,max_x,by=xspread))
 
-    cp <- multipoint(xs=z$x, ys=z$y, ptsize=ptsize, catcolor=c(1,1,1,0), canvas=canvas)
+    cp <- multipoint(xs=z$x, ys=z$y, ptsize=ptsize, catcolor='#FFFFFF', canvas=canvas)
 
-    cols <- colorRamp(rainbow(7))(seq(0.0,1,by=0.12)) / 255
+    #cols <- colorRamp(rainbow(7))(seq(0.0,1,by=0.12)) / 255
+    cols <- rainbow(7)
     mults <- seq(-4,4) * yspread
 
-    for (i in 1:nrow(cols)) {
-        morepoints(cp, xs=z$x, ys=z$y, ptsize=ptsize, catcolor=cols[i,], yshift=mults[i])
+    for (i in 1:length(cols)) {
+        morepoints(cp, xs=z$x, ys=z$y, ptsize=ptsize, catcolor=cols[i], yshift=mults[i])
     }
 
-    print(paste(z$x[length(z$x)], "  ", z$y[length(z$y)]))
+    print(paste(z$x[length(z$x)], "  ", z$y[length(z$y)], "\n\n"))
     morecats(cp, xs=z$x[length(z$x)], ys=z$y[length(z$y)],
              xshift=catshiftx, yshift=catshifty, size=1, cat=cat)
 }
