@@ -171,3 +171,28 @@ catsScaleData <- function(obj,xs,ys) {
 	}
 	list(xscale=xscale, yscale=yscale)
 }
+
+
+yeOldColorMod <- function(img, colorVec=c(0,0,0,1)) {
+  #
+  # Just to remember how things used to be, back in the day.
+  #
+	# the cat pngs are 72x72x4, where each of those 4 layers
+	# represents one component of the RGB color space.
+	# this function takes the last, black layer, and creates
+	# a new vector, multiplying colorVec by that c(0,0,0,x)
+
+	for (i in 1:72) {
+		for (j in 1:72) {
+				imgSum <- min(sum(img[i,j,1:4]), 1)
+				if (imgSum > 0.0) {
+					val <- img[i,j,4]
+					img[i,j,1:4] <- colorVec
+					img[i,j,1:4] <- img[i,j,1:4] * imgSum
+				} else {
+					img[i,j,1:4] <- c(0,0,0,0)
+				}
+		}
+	}
+	img
+}
