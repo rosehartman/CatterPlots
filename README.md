@@ -45,7 +45,7 @@ cats(purr, -x, -y, cat=4, catcolor='#FF0000')
 
 # for more fun ...
 meow <- multicat(xs=x, ys=y, cat=c(1,2,3), catcolor=list('#33FCFF','#FF0000'), canvas=c(-0.1,1.1, -0.1, 1.1))
-morecats(purr, x, 10*sin(x)+40, size=0.05, cat=c(4,5,6), catcolor=list('#0495EE','#EE7504'), type="line")
+morecats(meow, x, 10*sin(x)+40, size=0.05, cat=c(4,5,6), catcolor=list('#0495EE','#EE7504'), type="line")
 
 # random cats
 meow <- multicat(xs=x, ys=rnorm(21),
