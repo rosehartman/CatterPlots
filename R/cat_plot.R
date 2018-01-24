@@ -38,7 +38,7 @@
 #' @export
 catplot <- function(xs, ys,
 					size=0.1, cat=1,
-					catcolor = c(0,0,0,1),
+					catcolor = '#000000FF',
 					linecolor=1, type="justcats",
 					canvas=c(0,1.1,0,1.1), ...) {
 	require(png)
@@ -94,7 +94,7 @@ catplot <- function(xs, ys,
 #' purr <- catplot(xs=x, ys=y, cat=3, catcolor=c(0,1,1,1))
 #' cats(purr, -x, -y, cat=4, catcolor=c(1,0,1,1))'
 #' @export
-cats <- function(obj=NULL, xs, ys, size=0.1, cat=1, catcolor = c(0,0,0,1),
+cats <- function(obj=NULL, xs, ys, size=0.1, cat=1, catcolor = '#000000FF',
 										linecolor=1, type="justcats") {
 	# needs a plot already up, and the catObj returned from it.
 	if(is.null(obj)) {
@@ -121,25 +121,12 @@ cats <- function(obj=NULL, xs, ys, size=0.1, cat=1, catcolor = c(0,0,0,1),
 }
 
 
-colorMod <- function(img, colorVec=c(0,0,0,1)) {
-	# the cat pngs are 72x72x4, where each of those 4 layers
-	# represents one component of the RGB color space.
-	# this function takes the last, black layer, and creates
-	# a new vector, multiplying colorVec by that c(0,0,0,x)
-
-	for (i in 1:72) {
-		for (j in 1:72) {
-				imgSum <- min(sum(img[i,j,1:4]), 1)
-				if (imgSum > 0.0) {
-					val <- img[i,j,4]
-					img[i,j,1:4] <- colorVec
-					img[i,j,1:4] <- img[i,j,1:4] * imgSum
-				} else {
-					img[i,j,1:4] <- c(0,0,0,0)
-				}
-		}
-	}
-	img
+colorMod <- function(img, col='#000000FF') {
+  # applies color to non-transparent areas of img
+  colorVec = col2rgb(col, alpha = T) / 255
+  array(t(sapply(pmin(apply(img, c(1,2), sum), 1),
+                 function(x){x * colorVec})),
+        dim=c(nrow(img), ncol(img), 4))
 }
 
 
