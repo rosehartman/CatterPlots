@@ -130,7 +130,7 @@ multipoint <- function(xs, ys,
 #' cats(purr, -x, -y, cat=4, catcolor=c(1,0,1,1))'
 #' @export
 morecats <- function(obj=NULL, xs, ys, size=0.1, cat=c(4,5,6), catcolor = c('#0000FFFF', '#00FF00FF'),
-										linecolor=1, type="justcats", yshift=0, xshift=0) {
+										linecolor=1, type="justcats", yshift=0, xshift=0, color=T) {
 	# needs a plot already up, and the catObj returned from it.
 	if(is.null(obj)) {
 		print("Please feed the cats!  cat_food <- catplot(...);  cats(cat_food, ...)")
@@ -153,7 +153,11 @@ morecats <- function(obj=NULL, xs, ys, size=0.1, cat=c(4,5,6), catcolor = c('#00
 	catcolors <- rep_len(catcolor, length(xscale))
 
 	# color the images
-	imgs = mapply(colorMod, catdat[cats], catcolors, SIMPLIFY = F)
+	if (color){
+	  imgs = mapply(colorMod, catdat[cats], catcolors, SIMPLIFY = F)
+	} else {
+	  imgs = catdat[cats]
+	}
 
 	# draw them
 	invisible(mapply(rasterImage, imgs, xscale - size/2, yscale - size/2, xscale + size/2, yscale + size/2))

@@ -54,7 +54,7 @@ rainbowCats <- function(xs, ys, ptsize=0.1, yspread=0.1, xspread=0.1,
     cp <- multipoint(xs=z$x, ys=z$y, ptsize=ptsize, catcolor='#FFFFFF', canvas=canvas)
 
     #cols <- colorRamp(rainbow(7))(seq(0.0,1,by=0.12)) / 255
-    cols <- rainbow(7)
+    cols <- rainbow(9, end=.8)
     mults <- seq(-4,4) * yspread
 
     for (i in 1:length(cols)) {
@@ -63,5 +63,5 @@ rainbowCats <- function(xs, ys, ptsize=0.1, yspread=0.1, xspread=0.1,
 
     print(paste(z$x[length(z$x)], "  ", z$y[length(z$y)], "\n\n"))
     morecats(cp, xs=z$x[length(z$x)], ys=z$y[length(z$y)],
-             xshift=catshiftx, yshift=catshifty, size=1, cat=cat)
+             xshift=catshiftx, yshift=catshifty, size=1, cat=cat, color=F)
 }
