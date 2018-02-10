@@ -28,6 +28,7 @@
 #' @param linecolor color of plotted lines
 #' @param type the type of plot ... justcats, or line
 #' @param canvas the plotting area
+#' @param ... additional parameters to pass to plot()
 #'
 #' @return a cat plot object... to plot more cats.
 #' @examples
@@ -41,8 +42,6 @@ catplot <- function(xs, ys,
 					catcolor = '#000000FF',
 					linecolor=1, type="justcats",
 					canvas=c(0,1.1,0,1.1), ...) {
-	require(png)
-	data(cats)
 
 	args <- list(...)
 
@@ -50,8 +49,6 @@ catplot <- function(xs, ys,
 	par(usr=canvas)
 
 	img <- catdat[[cat]]
-	dims<-dim(img)[1:2] #number of x-y pixels for the img (aspect ratio)
-	AR<-dims[1]/dims[2]
 
 	scaledData <- scaleData(xs,ys,args)
 	xscale <- scaledData$xscale
@@ -101,10 +98,7 @@ cats <- function(obj=NULL, xs, ys, size=0.1, cat=1, catcolor = '#000000FF',
 		print("Please feed the cats!  cat_food <- catplot(...);  cats(cat_food, ...)")
 	}
 
-
 	img <- catdat[[cat]]
-	dims<-dim(img)[1:2] #number of x-y pixels for the img (aspect ratio)
-	AR<-dims[1]/dims[2]
 
 	scaledData <- catsScaleData(obj,xs,ys)
 	xscale <- scaledData$xscale

@@ -15,19 +15,19 @@ rainbowCats(xs, ys, ptsize = 0.1, yspread = 0.1, xspread = 0.1,
 
 \item{ptsize}{control the size.}
 
-\item{yspread.}{the vertical spread of the rainbow}
+\item{yspread}{the vertical spread of the rainbow}
 
-\item{xspread.}{the horizontal spread of rainbow particles}
+\item{xspread}{the horizontal spread of rainbow particles}
 
-\item{cat.}{what cat shall make thine rainbow? nyan is 11}
+\item{cat}{what cat shall make thine rainbow? nyan is 11}
 
-\item{catshiftx.}{get your cat connected to the rainbow!}
+\item{catshiftx}{get your cat connected to the rainbow!}
 
-\item{catshifty.}{get your cat connected to the rainbow!}
+\item{catshifty}{get your cat connected to the rainbow!}
 
-\item{canvas.}{you are probably going to want to zoom in and out (x1,x2,y1,y2)}
+\item{spar}{the smoothness of the rainbow.}
 
-\item{spar.}{the smoothness of the rainbow.}
+\item{canvas}{you are probably going to want to zoom in and out (x1,x2,y1,y2)}
 }
 \value{
 a rainbow!
@@ -36,7 +36,6 @@ a rainbow!
 Rainbows!  Even more colors.
 }
 \examples{
-see also tests/rainbow_test.R
 x <- -10:10
 y <- -x^2 + 10
 rainbowCats(x, y, yspread=0.05, xspread=0.05, canvas=c(-0.5,1.5,-1,0.8))
