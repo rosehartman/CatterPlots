@@ -5,8 +5,8 @@
 \title{Plot even more cats! In more colors and shapes!}
 \usage{
 morecats(obj = NULL, xs, ys, size = 0.1, cat = c(4, 5, 6),
-  catcolor = list(c(0, 0, 1, 1), c(0, 1, 0, 1)), linecolor = 1,
-  type = "justcats", yshift = 0, xshift = 0)
+  catcolor = c("#0000FFFF", "#00FF00FF"), linecolor = 1,
+  type = "justcats", yshift = 0, xshift = 0, color = TRUE)
 }
 \arguments{
 \item{obj}{a catplot object, returned from catplot}
@@ -28,6 +28,8 @@ morecats(obj = NULL, xs, ys, size = 0.1, cat = c(4, 5, 6),
 \item{yshift}{shifts the cat up or down, within the scaled space}
 
 \item{xshift}{shifts the cat left or right, within the scaled space.}
+
+\item{color}{whether or not to apply color to image(s)}
 }
 \value{
 a cat plot object... to plot more cats.

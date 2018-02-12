@@ -4,7 +4,7 @@
 \alias{multicat}
 \title{Multi-cat!  More cats. More colors.}
 \usage{
-multicat(xs, ys, size = 0.1, cat = c(1, 2), catcolor = c(0, 0, 0, 1),
+multicat(xs, ys, size = 0.1, cat = c(1, 2), catcolor = "#000000FF",
   linecolor = 1, type = "justcats", canvas = c(0, 1.1, 0, 1.1), ...)
 }
 \arguments{
@@ -23,6 +23,8 @@ multicat(xs, ys, size = 0.1, cat = c(1, 2), catcolor = c(0, 0, 0, 1),
 \item{type}{the type of plot ... justcats, or line}
 
 \item{canvas}{the plotting area}
+
+\item{...}{additional parameters to pass to plot()}
 }
 \value{
 a cat plot object... to plot more cats.

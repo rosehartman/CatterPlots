@@ -22,8 +22,6 @@
 
 # make sure the cats have transparent backgrounds!
 
-library(png)
-
 createCatList <- function(dir) {
 	fs <- list.files(dir, pattern="png")
 	catlist <- vector("list", length(fs))

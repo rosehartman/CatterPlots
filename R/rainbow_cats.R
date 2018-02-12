@@ -22,26 +22,23 @@
 #' @param xs a vector of numbers
 #' @param ys another vector of numbers
 #' @param ptsize control the size.
-#' @param yspread. the vertical spread of the rainbow
-#' @param xspread. the horizontal spread of rainbow particles
-#' @param cat. what cat shall make thine rainbow? nyan is 11
-#' @param catshiftx. get your cat connected to the rainbow!
-#' @param catshifty. get your cat connected to the rainbow!
-#' @param canvas. you are probably going to want to zoom in and out (x1,x2,y1,y2)
-#' @param spar. the smoothness of the rainbow.
+#' @param yspread the vertical spread of the rainbow
+#' @param xspread the horizontal spread of rainbow particles
+#' @param cat what cat shall make thine rainbow? nyan is 11
+#' @param catshiftx get your cat connected to the rainbow!
+#' @param catshifty get your cat connected to the rainbow!
+#' @param canvas you are probably going to want to zoom in and out (x1,x2,y1,y2)
+#' @param spar the smoothness of the rainbow.
 #'
 #' @return a rainbow!
 #' @examples
-#' see also tests/rainbow_test.R
+# see also tests/rainbow_test.R
 #' x <- -10:10
 #' y <- -x^2 + 10
 #' rainbowCats(x, y, yspread=0.05, xspread=0.05, canvas=c(-0.5,1.5,-1,0.8))
 #' @export
 rainbowCats <- function(xs, ys, ptsize=0.1, yspread=0.1, xspread=0.1,
                         cat=11, catshiftx=0, catshifty=0, spar=NA, canvas=c(-0.5,1.5,-1,1.5)) {
-    require(png)
-    data(cats)
-
     if (is.na(spar)) {
         sm <- smooth.spline(ys~xs)
     } else {
@@ -63,5 +60,5 @@ rainbowCats <- function(xs, ys, ptsize=0.1, yspread=0.1, xspread=0.1,
 
     print(paste(z$x[length(z$x)], "  ", z$y[length(z$y)], "\n\n"))
     morecats(cp, xs=z$x[length(z$x)], ys=z$y[length(z$y)],
-             xshift=catshiftx, yshift=catshifty, size=1, cat=cat, color=F)
+             xshift=catshiftx, yshift=catshifty, size=1, cat=cat, color=FALSE)
 }

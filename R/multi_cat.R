@@ -19,6 +19,11 @@
 
 #' Multi-cat!  More cats. More colors.
 #'
+#' @import stats
+#' @import png
+#' @import grDevices
+#' @import graphics
+#' @import utils
 #' @param xs a vector of numbers
 #' @param ys another vector of numbers
 #' @param size the size of the cat (0.1 is a good starting point)
@@ -27,6 +32,7 @@
 #' @param linecolor color of plotted lines
 #' @param type the type of plot ... justcats, or line
 #' @param canvas the plotting area
+#' @param ... additional parameters to pass to plot()
 #'
 #' @return a cat plot object... to plot more cats.
 #' @examples
@@ -40,17 +46,14 @@ multicat <- function(xs, ys,
 					catcolor = '#000000FF',
 					linecolor=1, type="justcats",
 					canvas=c(0,1.1,0,1.1), ...) {
-	require(png)
-	data(cats)
-
 	args <- list(...)
 
 	plot(x=xs, y=ys, col=0, xaxt="n", yaxt="n", ...)
 	par(usr=canvas)
 
 	img <- catdat[[cat[1]]]
-	dims<-dim(img)[1:2] #number of x-y pixels for the img (aspect ratio)
-	AR<-dims[1]/dims[2]
+	#dims<-dim(img)[1:2] #number of x-y pixels for the img (aspect ratio)
+	#AR<-dims[1]/dims[2]
 
 	scaledData <- scaleData(xs,ys,args)
 	xscale <- scaledData$xscale
@@ -71,7 +74,7 @@ multicat <- function(xs, ys,
 	catcolors <- rep_len(catcolor, length(xscale))
 
 	# color the images
-	imgs = mapply(colorMod, catdat[cats], catcolors, SIMPLIFY = F)
+	imgs = mapply(colorMod, catdat[cats], catcolors, SIMPLIFY = FALSE)
 
 	# draw them
 	invisible(mapply(rasterImage, imgs, xscale - size/2, yscale - size/2, xscale + size/2, yscale + size/2))
@@ -121,6 +124,7 @@ multipoint <- function(xs, ys,
 #' @param type the type of plot ... justcats, or line
 #' @param yshift shifts the cat up or down, within the scaled space
 #' @param xshift shifts the cat left or right, within the scaled space.
+#' @param color whether or not to apply color to image(s)
 #'
 #' @return a cat plot object... to plot more cats.
 #' @examples
@@ -130,15 +134,13 @@ multipoint <- function(xs, ys,
 #' cats(purr, -x, -y, cat=4, catcolor=c(1,0,1,1))'
 #' @export
 morecats <- function(obj=NULL, xs, ys, size=0.1, cat=c(4,5,6), catcolor = c('#0000FFFF', '#00FF00FF'),
-										linecolor=1, type="justcats", yshift=0, xshift=0, color=T) {
+										linecolor=1, type="justcats", yshift=0, xshift=0, color=TRUE) {
 	# needs a plot already up, and the catObj returned from it.
 	if(is.null(obj)) {
 		print("Please feed the cats!  cat_food <- catplot(...);  cats(cat_food, ...)")
 	}
 
 	img <- catdat[[cat[1]]]
-	dims<-dim(img)[1:2] #number of x-y pixels for the img (aspect ratio)
-	AR<-dims[1]/dims[2]
 
 	scaledData <- catsScaleData(obj,xs,ys)
 	xscale <- scaledData$xscale + xshift
@@ -154,7 +156,7 @@ morecats <- function(obj=NULL, xs, ys, size=0.1, cat=c(4,5,6), catcolor = c('#00
 
 	# color the images
 	if (color){
-	  imgs = mapply(colorMod, catdat[cats], catcolors, SIMPLIFY = F)
+	  imgs = mapply(colorMod, catdat[cats], catcolors, SIMPLIFY = FALSE)
 	} else {
 	  imgs = catdat[cats]
 	}

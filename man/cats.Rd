@@ -4,7 +4,7 @@
 \alias{cats}
 \title{Plot more cats!}
 \usage{
-cats(obj = NULL, xs, ys, size = 0.1, cat = 1, catcolor = c(0, 0, 0, 1),
+cats(obj = NULL, xs, ys, size = 0.1, cat = 1, catcolor = "#000000FF",
   linecolor = 1, type = "justcats")
 }
 \arguments{
