@@ -51,10 +51,6 @@ multicat <- function(xs, ys,
 	plot(x=xs, y=ys, col=0, xaxt="n", yaxt="n", ...)
 	par(usr=canvas)
 
-	img <- catdat[[cat[1]]]
-	#dims<-dim(img)[1:2] #number of x-y pixels for the img (aspect ratio)
-	#AR<-dims[1]/dims[2]
-
 	scaledData <- scaleData(xs,ys,args)
 	xscale <- scaledData$xscale
 	yscale <- scaledData$yscale
@@ -77,7 +73,7 @@ multicat <- function(xs, ys,
 	imgs = mapply(colorMod, catdat[cats], catcolors, SIMPLIFY = FALSE)
 
 	# draw them
-	invisible(mapply(rasterImage, imgs, xscale - size/2, yscale - size/2, xscale + size/2, yscale + size/2))
+	invisible(mapply(rasterImage, imgs, xscale - size/2, yscale - size/2, xscale + size/2, yscale + size/2, interpolate=TRUE))
 
 	list(xs=xs, ys=ys, args=args, canvas=canvas)
 }
@@ -140,8 +136,6 @@ morecats <- function(obj=NULL, xs, ys, size=0.1, cat=c(4,5,6), catcolor = c('#00
 		print("Please feed the cats!  cat_food <- catplot(...);  cats(cat_food, ...)")
 	}
 
-	img <- catdat[[cat[1]]]
-
 	scaledData <- catsScaleData(obj,xs,ys)
 	xscale <- scaledData$xscale + xshift
 	yscale <- scaledData$yscale + yshift
@@ -162,7 +156,7 @@ morecats <- function(obj=NULL, xs, ys, size=0.1, cat=c(4,5,6), catcolor = c('#00
 	}
 
 	# draw them
-	invisible(mapply(rasterImage, imgs, xscale - size/2, yscale - size/2, xscale + size/2, yscale + size/2))
+	invisible(mapply(rasterImage, imgs, xscale - size/2, yscale - size/2, xscale + size/2, yscale + size/2, interpolate=TRUE))
 
 	cat(paste(apply(matrix(c(xscale - size/2, yscale - size/2, xscale + size/2, yscale + size/2), ncol=4),
 	                1, paste, collapse='  '),
