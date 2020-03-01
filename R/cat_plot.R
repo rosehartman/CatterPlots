@@ -41,7 +41,7 @@ catplot <- function(xs, ys,
 					size=0.1, cat=1,
 					catcolor = '#000000FF',
 					linecolor=1, type="justcats",
-					canvas=c(0,1.1,0,1.1), ...) {
+					canvas=c(0,1.1,0,1.1), labs = xs, ...) {
 
 	args <- list(...)
 
@@ -54,11 +54,11 @@ catplot <- function(xs, ys,
 	xscale <- scaledData$xscale
 	yscale <- scaledData$yscale
 
-	xat = seq(min(xscale), max(xscale), length.out=length(xscale))
-	yat = seq(min(yscale), max(yscale), length.out=length(yscale))
+	xat = seq(min(xscale), max(xscale), length.out=6)
+	yat = seq(min(yscale), max(yscale), length.out=10)
 	xaxtlab = round(seq(min(xs), max(xs),length.out=length(xat)),1)
-	yaxtlab = round(seq(min(ys), max(ys),length.out=length(xat)),1)
-	axis(side=1, at=xat, labels=xaxtlab)
+	yaxtlab = round(seq(min(ys), max(ys),length.out=10),1)
+	axis(side=1, at=xat, labels=labs, padj = 0.5)
 	axis(side=2, at=yat, labels=yaxtlab)
 
 	# modify the cat image
